@@ -1,6 +1,8 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 2.8.7)
 PROJECT (pbc)
 
+OPTION (PBC_BUILD_LUA "Build build lua" ON)
+
 SET (pbc_SOURCES
     src/alloc.c
     src/array.c
@@ -30,9 +32,25 @@ SET (pbc_HEADERS
     src/varint.h
 )
 
-INCLUDE_DIRECTORIES (${CMAKE_CURRENT_SOURCE_DIR})
+INCLUDE_DIRECTORIES (${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua_include
+)
+
+IF (APPLE)
+    INCLUDE_DIRECTORIES (/usr/include/malloc)
+ENDIF ()
+
+IF (PBC_BUILD_LUA)
+    LIST (APPEND pbc_SOURCES
+        binding/lua/pbc-lua.c
+    )
+ENDIF ()
 
 ADD_LIBRARY (pbc
-    ${cryptopp_SOURCES}
-    ${cryptopp_HEADERS}
+    ${pbc_SOURCES}
+    ${pbc_HEADERS}
 )
+
+IF (WIN32)
+    SET_TARGET_PROPERTIES( pbc PROPERTIES COMPILE_FLAGS "/TP" ${BUILD_FLAGS})
+ENDIF ()
