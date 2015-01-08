@@ -40,7 +40,7 @@ cp $DIR/Android.mk $DIR_TO_ANDROID/
 
 cd $DIR
 mkdir -p $DIR_INCLUDE
-find ../src/ -name '*.h' -exec cp {} $DIR_INCLUDE/ \;
+find ../src/ -name '*.h' -maxdepth 1 -exec cp {} $DIR_INCLUDE/ \;
 mkdir -p $DIR_SCRIPTS
 cp ../binding/lua/parser.lua $DIR_SCRIPTS/
 cp ../binding/lua/protobuf.lua $DIR_SCRIPTS/
