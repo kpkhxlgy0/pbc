@@ -7,4 +7,5 @@ Debug
 Release
 build
 .DS_Store
+tools/build*/
 
