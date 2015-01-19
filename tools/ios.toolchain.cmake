@@ -148,6 +148,7 @@ if (${IOS_PLATFORM} STREQUAL "OS")
 else (${IOS_PLATFORM} STREQUAL "OS")
 	set (IOS_ARCH i386)
 endif (${IOS_PLATFORM} STREQUAL "OS")
+set (IOS_ARCH "$(ARCHS_STANDARD)")
 
 set (CMAKE_OSX_ARCHITECTURES ${IOS_ARCH} CACHE string  "Build architecture for iOS")
 
