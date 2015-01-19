@@ -1,4 +1,9 @@
+CMAKE_BUILD_TYPE=$1
+if [ "-$CMAKE_BUILD_TYPE" = "-" ]; then
+    CMAKE_BUILD_TYPE=Release
+fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
 
 DIR_ALL=$DIR/build_all
 rm -rf $DIR_ALL
@@ -13,7 +18,7 @@ LIB_NAME=libpbc.a
 function build()
 {
     PLATFORM=$1
-    ./build_${PLATFORM}.sh
+    ./build_${PLATFORM}.sh $CMAKE_BUILD_TYPE
     DIR_TO=$DIR_PREBUILT/$PLATFORM
     mkdir -p $DIR_TO
     cp $DIR/build_$PLATFORM/$LIB_NAME $DIR_TO/
@@ -22,7 +27,7 @@ function build()
 build mac
 build ios
 
-./build_android.sh
+./build_android.sh $CMAKE_BUILD_TYPE
 DIR_TO_ANDROID=$DIR_PREBUILT/android
 function build_android()
 {
