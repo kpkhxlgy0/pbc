@@ -13,7 +13,7 @@ function build()
     mkdir -p $DIR_ABI
     cd $DIR_ABI && cd $_
     cmake -DCMAKE_TOOLCHAIN_FILE=../../android.toolchain.cmake -DANDROID_ABI=$ABI -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE ../../..
-    make
+    make -j8
 }
 
 build armeabi

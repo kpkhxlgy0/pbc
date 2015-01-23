@@ -8,4 +8,4 @@ rm -rf $DIR_TO
 mkdir -p $DIR_TO
 cd $DIR_TO && cd $_
 cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE ../..
-make
+make -j8

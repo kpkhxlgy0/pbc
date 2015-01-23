@@ -1,3 +1,4 @@
+defaults write com.apple.Xcode PBXNumberOfParallelBuildSubtasks 8
 CMAKE_BUILD_TYPE=$1
 if [ "-$CMAKE_BUILD_TYPE" = "-" ]; then
     CMAKE_BUILD_TYPE=Release
